@@ -19,9 +19,11 @@ app.use(session({ secret: 'this is the secret' }));
 app.use(multer());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(__dirname + '/public'));
 
 mongoose.connect('mongodb://localhost/lunchbox');
 
+// User Schema and Model ----------------------------------
 var UserSchema = new mongoose.Schema({
 	username: String,
 	password: String,
@@ -29,15 +31,12 @@ var UserSchema = new mongoose.Schema({
 });
 var User = mongoose.model('User', UserSchema);
 
-
-app.use(express.static(__dirname + '/public'));
-
+// Login  ----------------------------------
 passport.use(new LocalStrategy(
-function(username, password, done)
-{
+function (username, password, done) {
 	User.findOne({username: username, password: password}, function (err,docs) {
 		if (err) {
-			return done(null, false, {message: 'Unable to login'});
+			return done(null, false, {errorMessage: 'Username or password is invalid'});
 		} else {
 			return done(null, docs);
 		}
@@ -52,33 +51,28 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 
-var auth = function(req, res, next)
-{
+var auth = function (req, res, next) {
     if (!req.isAuthenticated())
         res.send(401);
     else
         next();
 };
 
-app.get('/users', auth, function(req, res)
-{
+app.get('/users', auth, function (req, res) {
 	var users = User.find(function (err,docs) {
 		res.json(docs);
 	});
 });
 
-app.get('/loggedin', function(req, res)
-{
+app.get('/loggedin', function( req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');
 });
     
-app.post('/login', passport.authenticate('local'), function(req, res)
-{
+app.post('/login', passport.authenticate('local'), function (req, res) {
     res.send(req.user);
 });
 
-app.post('/logout', function(req, res)
-{
+app.post('/logout', function (req, res) {
     req.logOut();
     res.send(200);
 }); 
