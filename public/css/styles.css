@@ -4,3 +4,21 @@ body {
 	color: #333;
 	margin: 0px;
 }
+
+nav a {
+	color: black;
+}
+
+.navbar-brand {
+	font-family: 'Lobster', cursive;
+	font-size: 40px;
+}
+
+.navbar-brand img {
+	margin-top: -10px;
+	display: inline;
+}
+
+ul.navbar-nav {
+	margin-top: 8px;
+}
