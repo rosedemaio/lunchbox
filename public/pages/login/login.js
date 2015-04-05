@@ -6,7 +6,6 @@ app.controller('LoginCtrl', function($scope, $http, $location)
         .success(function(response)
         {
             $scope.$parent.user = response;
-            console.log($scope.$parent);
             $location.path("/");
         });
     }

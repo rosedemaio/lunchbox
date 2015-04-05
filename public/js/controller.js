@@ -4,9 +4,17 @@ app.controller('LunchboxController', function($scope, $http, $location)
 {
     $http.get('/loggedin').success(function(user)
     {
-        console.log("logged in user:" + user.username);
+        console.log("logged in user:", user);
         $scope.user = user;
     });
+
+    $scope.logout = function () {
+    	$http.post('/logout').success(function(response)
+	    {
+	        $scope.user = '0';
+	        $location.url('/home');
+	    });
+    };
 });
 
 app.config(['$routeProvider', function ($routeProvider) {

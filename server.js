@@ -36,8 +36,6 @@ passport.use(new LocalStrategy(
 function(username, password, done)
 {
 	User.findOne({username: username, password: password}, function (err,docs) {
-		console.log(docs);
-		console.log(err);
 		if (err) {
 			return done(null, false, {message: 'Unable to login'});
 		} else {
