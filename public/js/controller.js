@@ -1,5 +1,14 @@
 var app = angular.module("LunchboxApp", ["ngRoute"]);
 
+app.controller('LunchboxController', function($scope, $http, $location)
+{
+    $http.get('/loggedin').success(function(user)
+    {
+        console.log("logged in user:" + user.username);
+        $scope.user = user;
+    });
+});
+
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
     when('/home', {
