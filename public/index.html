@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-	    <title>Lunchbox</title>
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link href='http://fonts.googleapis.com/css?family=Raleway:500,800' rel='stylesheet' type='text/css'>
-	    <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/styles.css" rel="stylesheet">
-	    <script src="js/jquery-2.1.3.min.js"></script>
-	    <script src="js/jquery-ui.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/angular.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
-  	</head>
-  	<body ng-app="Lunchbox">
-    	<div class="container">
-      		<header>
-			  	<nav class="navbar navbar-fixed-top">
-			      	<div class="container">
-				        <div class="navbar-header">
-				          	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					            <span class="sr-only">Toggle navigation</span>
-					            <span class="icon-bar"></span>
-					            <span class="icon-bar"></span>
-					            <span class="icon-bar"></span>
-				          	</button>
-				          	<a class="navbar-brand" href="#">
-				          		<img src="logo.png" />
-				          		<span>Lunch Box</span>
-				          	</a>
-				        </div>
-				        <div id="navbar" class="collapse navbar-collapse">
-				          	<ul class="nav navbar-nav">
-					            <li ><a href="#">Home</a></li>
-					            <li><a href="#">Browse</a></li>
-					            <li><a href="#">Search</a></li>
-					            <li><a href="#">My Recipes</a></li>
-				           	</ul>
-				          	<ul class="nav navbar-nav navbar-right">
-					            <li><a href="#">Sign In</a></li>
-								<li><a href="#">Sign Up</a></li>
-				          	</ul>
-				        </div>
-			      	</div>
-			    </nav>
-	      	</header>
-      		<main ng-view>
-			</main>
-    	</div>
-  	</body>
+    <head>
+        <meta charset="utf-8">
+        <title>Lunchbox</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='http://fonts.googleapis.com/css?family=Raleway:500,800' rel='stylesheet' type='text/css'>
+        <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet">
+        <script src="js/jquery-2.1.3.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
+        <script src="js/controller.js"></script>
+        <script src="pages/login/login.js"></script>
+    </head>
+    <body ng-app="LunchboxApp">
+        <div class="container">
+            <header>
+                <nav class="navbar navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">
+                                <img src="logo.png" />
+                                <span>Lunch Box</span>
+                            </a>
+                        </div>
+                        <div id="navbar" class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li ><a href="#/home">Home</a></li>
+                                <li><a href="#/browse">Browse</a></li>
+                                <li><a href="#/search">Search</a></li>
+                                <li><a href="#/my-recipes">My Recipes</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#/login">Sign In</a></li>
+                                <li><a href="#">Sign Up</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <main ng-view>
+            </main>
+        </div>
+    </body>
 </html>
