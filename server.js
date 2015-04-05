@@ -26,8 +26,7 @@ mongoose.connect('mongodb://localhost/lunchbox');
 // User Schema and Model ----------------------------------
 var UserSchema = new mongoose.Schema({
 	username: String,
-	password: String,
-	loggedIn: Boolean
+	password: String
 });
 var User = mongoose.model('User', UserSchema);
 
