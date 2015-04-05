@@ -10,6 +10,8 @@ var multer     = require('multer');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 
+var mongoose = require('mongoose');
+
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,18 +20,30 @@ app.use(multer());
 app.use(passport.initialize());
 app.use(passport.session());
 
+mongoose.connect('mongodb://localhost/lunchbox');
+
+var UserSchema = new mongoose.Schema({
+	username: String,
+	password: String,
+	loggedIn: Boolean
+});
+var User = mongoose.model('User', UserSchema);
+
 
 app.use(express.static(__dirname + '/public'));
 
 passport.use(new LocalStrategy(
 function(username, password, done)
 {
-    if(username == 'admin' && password == 'lunchbox')
-    {
-        var user = { firstName: 'Lunch', lastName: 'Box' };
-        return done(null, user);
-    }
-    return done(null, false, {message: 'Unable to login'});
+	User.findOne({username: username, password: password}, function (err,docs) {
+		console.log(docs);
+		console.log(err);
+		if (err) {
+			return done(null, false, {message: 'Unable to login'});
+		} else {
+			return done(null, docs);
+		}
+	});
 }));
 
 passport.serializeUser(function(user, done) {
@@ -48,10 +62,12 @@ var auth = function(req, res, next)
         next();
 };
 
-// app.get('/users', auth, function(req, res)
-// {
-//     res.json([{username: 123},{username: 234}]);
-// });
+app.get('/users', auth, function(req, res)
+{
+	var users = User.find(function (err,docs) {
+		res.json(docs);
+	});
+});
 
 app.get('/loggedin', function(req, res)
 {
