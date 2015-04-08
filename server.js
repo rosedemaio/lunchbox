@@ -29,6 +29,7 @@ var UserSchema = new mongoose.Schema({
 	password: String
 });
 var User = mongoose.model('User', UserSchema);
+var conn = mongoose.connection;
 
 // Login  ----------------------------------
 passport.use(new LocalStrategy(
@@ -75,6 +76,20 @@ app.post('/logout', function (req, res) {
     req.logOut();
     res.send(200);
 }); 
+
+app.post('/register', function(req, res){
+	var newuser = req.body;
+	//newuser[_id]
+	conn.collection('users').insert(newuser, function (err,docs) {
+		if (err) {
+			res.send(401);
+		} else {
+			passport.authenticate('local')(req, res, function () {
+                res.send(req.user);
+            })
+		}
+	});
+});         
 
 // Look for openshift port and ip first, if not, host locally
 var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
