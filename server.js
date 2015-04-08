@@ -79,17 +79,29 @@ app.post('/logout', function (req, res) {
 
 app.post('/register', function(req, res){
 	var newuser = req.body;
-	//newuser[_id]
+	User.findOne({username: newuser.username}, function (err,docs) {
+		// first check to see if user already has that username (in which case docs would be non-null)
+		if (err || docs) {
+			// if so, return error and error message saying to pick new username
+			res.status(401).send('Username ' + newuser.username + ' already taken. Choose a new username.');
+		} else {
+			// otherwise insert and log in new user
+			insertNewUser(req, res, newuser);
+		}
+	});
+});
+
+function insertNewUser(req, res, newuser)  {
 	conn.collection('users').insert(newuser, function (err,docs) {
 		if (err) {
-			res.send(401);
+			res.status(401).send('Error in registration');
 		} else {
 			passport.authenticate('local')(req, res, function () {
                 res.send(req.user);
             })
 		}
 	});
-});         
+}        
 
 // Look for openshift port and ip first, if not, host locally
 var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';

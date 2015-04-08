@@ -12,8 +12,7 @@ app.controller('RegisterCtrl', function($scope, $http, $location)
             $location.path("/");
         })
         .error(function (data) {
-            console.log(data);
-            $scope.errorMessage = 'Registration failed';
+            $scope.errorMessage = data;
         });
     }
 });
