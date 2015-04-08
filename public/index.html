@@ -16,6 +16,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
         <script src="js/controller.js"></script>
         <script src="pages/login/login.js"></script>
+        <script src="pages/register/register.js"></script>
     </head>
     <body ng-app="LunchboxApp">
         <div ng-controller="LunchboxController" class="container">
@@ -43,7 +44,7 @@
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a ng-show="user == '0'" href="#/login">Sign In</a></li>
-                                <li><a ng-show="user == '0'" href="#">Sign Up</a></li>
+                                <li><a ng-show="user == '0'" href="#/signup">Sign Up</a></li>
                                 <li><span class="username-welcome" ng-show="user != '0'">Welcome, {{user.username}}</span></li>
                                 <li><a ng-show="user != '0'" href="#" ng-click="logout()">Sign Out</a></li>
                             </ul>

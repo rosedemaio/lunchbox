@@ -32,6 +32,10 @@ app.config(['$routeProvider', function ($routeProvider) {
         templateUrl: '../pages/login/login.html',
         controller: 'LoginCtrl'
     }).
+    when('/signup', {
+        templateUrl: '../pages/register/register.html',
+        controller: 'RegisterCtrl'
+    }).
     otherwise({
         redirectTo: '/home'
     });
