@@ -1,0 +1,9 @@
+<h1>Register</h1>
+
+{{errorMessage}}
+
+<br/>
+<input placeholder='Username' ng-model='newuser.username'/><br/>
+<input placeholder='Password' ng-model='newuser.password' type='password'/><br/>
+<input id="retypedPassword" placeholder='Retype password' type='password'/><br/>
+<button ng-click='register(newuser)'>Register</button>
