@@ -8,6 +8,7 @@ app.controller("DetailsCtrl", function ($scope, $http, $routeParams) {
     $http.jsonp("http://api.yummly.com/v1/api/recipe/" + recipeId + "?" + $.param(params))
     .success(function (response) {
         console.log(response);
+        debugger
         $scope.recipe = response;
     })
     .error(function (data) {
