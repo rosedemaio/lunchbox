@@ -6,7 +6,25 @@
 
 <div class="row" ng-show="recipes">
     <div class="col-md-4" ng-repeat-start="recipe in recipes">
-        <span>{{recipe.recipeName}}</span>
+    	<div class="thumbnail">
+	    	<img src="{{recipe.imageUrlsBySize.90}}" alt="{{recipe.recipeName}}">
+	      	<div class="caption">
+		        <h3>{{recipe.recipeName}}</h3>
+		        <ul>
+		        	<li ng-repeat="ingredient in recipe.ingredients">
+		        		{{ingredient}}
+		        	</li>
+		        </ul>
+		        <p>
+		        	<a href="#" class="btn btn-primary" role="button">
+		        		<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+		        	</a> 
+		        	<a href="#" class="btn btn-default" role="button">
+		        		<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+		        	</a>
+		        </p>
+	      	</div>
+    	</div>
     </div>
     <div class="clearfix" ng-if="$index%3==2"></div>
     <div ng-repeat-end=""></div>
