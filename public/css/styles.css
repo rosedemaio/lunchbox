@@ -33,3 +33,16 @@ ul.navbar-nav {
 	padding-bottom: 15px;
 	display: inline-block;
 }
+
+.recipe-thumbnail .ingredient-list {
+	-webkit-line-clamp: 3; 
+   	line-height: 20px;
+   	height: 60px; 
+   	text-overflow: ellipsis;      
+}
+
+.recipe-thumbnail h3 {
+	-webkit-line-clamp: 2; /* number of lines to show */
+   	line-height: 26px;        /* fallback */
+   	height: 52px;       /* fallback */
+}
