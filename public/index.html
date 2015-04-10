@@ -18,6 +18,7 @@
         <script src="pages/login/login.js"></script>
         <script src="pages/register/register.js"></script>
         <script src="pages/search/search.js"></script>
+        <script src="pages/details/details.js"></script>
     </head>
     <body ng-app="LunchboxApp">
         <div ng-controller="LunchboxController" class="container">
@@ -42,6 +43,7 @@
                                 <li><a href="#/browse">Browse</a></li>
                                 <li><a href="#/search">Search</a></li>
                                 <li><a ng-show="user != '0'" href="#/my-recipes">My Recipes</a></li>
+                                <li><a href="#/recipe/French-Onion-Soup-1019866">Details</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a ng-show="user == '0'" href="#/login">Sign In</a></li>
