@@ -1,5 +1,4 @@
-app.controller('SearchCtrl', function($scope, $http, $location)
-{
+app.controller('SearchCtrl', function($scope, $http, $location) {
     $scope.search = function (recipe) {
         var params = {
             _app_id: "6e96cfda",
