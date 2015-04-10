@@ -1,8 +1,18 @@
 <h1> Search </h1>
 
 <br/>
-<input placeholder='Search...' ng-model='recipe.q' type='text'/><br/>
-<button ng-click='search(recipe)'>Search</button>
+<div class="row recipe-search-input-group">
+	<div class="col-lg-6">
+		<div class="input-group">
+		  	<input placeholder='Search...' class="form-control" ng-model='recipe.q' type='text'/>
+		  	<span class="input-group-btn">
+			    <button class="btn btn-default" type="button" ng-click='search(recipe)'>
+			    	<span class="fa fa-search"/>
+			    </button>
+		  	</span>
+		</div>
+	</div>
+</div>
 
 <div class="row" ng-show="recipes">
     <div class="col-sm-6 col-md-4" ng-repeat-start="recipe in recipes">
@@ -18,11 +28,7 @@
 		        <hr class="above-line"/>
 		        <span ng-show="recipe.totalTimeInSeconds" class="fa fa-clock-o"/>
 		        <span ng-show="recipe.totalTimeInSeconds">{{formatTime(recipe.totalTimeInSeconds)}}</span>
-		        <span class="fa fa-star"/>
-		        <span class="fa fa-star"/>
-		        <span class="fa fa-star"/>
-		        <span class="fa fa-star"/>
-		        <span class="fa fa-star"/>
+		        <span ng-bind-html="trust(setRating(recipe.rating))" />
 		    	<hr class="below-line"/>
 		        <p>
 		        	<a href="#" class="btn btn-primary" role="button">

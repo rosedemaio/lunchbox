@@ -34,6 +34,11 @@ ul.navbar-nav {
 	display: inline-block;
 }
 
+.recipe-search-input-group {
+	width: 50%;
+  	margin: 30px auto;
+}
+
 .pic-and-title {
 	margin-top: 10px;
 	height: 100px;
