@@ -1,5 +1,6 @@
 app.controller("DetailsCtrl", function ($scope, $http, $routeParams) {
     var recipeId = $routeParams.recipeId;
+    debugger
     // var recipeId = "French-Onion-Soup-1019866"
     $http.jsonp("http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=6e96cfda&_app_key=555f5bd10dffba7229ea6a9ec32c0705&callback=JSON_CALLBACK")
     .success(function (response) {

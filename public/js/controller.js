@@ -37,7 +37,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         templateUrl: '../pages/register/register.html',
         controller: 'RegisterCtrl'
     }).
-    when('/recipe/:recipeID', {
+    when('/recipe/:recipeId', {
         templateUrl: '../pages/details/details.html',
         controller: 'DetailsCtrl'
     }).
