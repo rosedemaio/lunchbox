@@ -1,4 +1,4 @@
-app.controller("DetailsCtrl", function ($scope, $http, $routeParams) {
+app.controller("DetailsCtrl", function ($scope, $http, $routeParams, $location) {
     var recipeId = $routeParams.recipeId;
     var params = {
         _app_id: "6e96cfda",
@@ -14,4 +14,4 @@ app.controller("DetailsCtrl", function ($scope, $http, $routeParams) {
         $scope.errorMessage = data;
     });
 
-})
+});
