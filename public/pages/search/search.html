@@ -1,1 +1,13 @@
-<p> search </p>
+<h1> Search </h1>
+
+<br/>
+<input placeholder='Search...' ng-model='recipe.q' type='text'/><br/>
+<button ng-click='search(recipe)'>Search</button>
+
+<div class="row" ng-show="recipes">
+    <div class="col-md-4" ng-repeat-start="recipe in recipes">
+        <span>{{recipe.recipeName}}</span>
+    </div>
+    <div class="clearfix" ng-if="$index%3==2"></div>
+    <div ng-repeat-end=""></div>
+</div>
