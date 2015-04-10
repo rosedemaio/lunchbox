@@ -10,6 +10,10 @@ nav a {
 	color: black;
 }
 
+nav {
+	background: white;
+}
+
 .navbar-brand {
 	font-family: 'Lobster', cursive;
 	font-size: 40px;
