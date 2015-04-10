@@ -1,17 +1,13 @@
 <h1> Search </h1>
 
 <br/>
-<div class="row recipe-search-input-group">
-	<div class="col-lg-6">
-		<div class="input-group">
-		  	<input placeholder='Search...' class="form-control" ng-model='recipe.q' type='text'/>
-		  	<span class="input-group-btn">
-			    <button class="btn btn-default" type="button" ng-click='search(recipe)'>
-			    	<span class="fa fa-search"/>
-			    </button>
-		  	</span>
-		</div>
-	</div>
+<div class="input-group recipe-search-input-group">
+  	<input placeholder='Search...' class="form-control" ng-model='recipe.q' type='text'/>
+  	<span class="input-group-btn">
+	    <button class="btn btn-default" type="button" ng-click='search(recipe)'>
+	    	<span class="fa fa-search"/>
+	    </button>
+  	</span>
 </div>
 
 <div class="row" ng-show="recipes">
