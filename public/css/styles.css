@@ -34,15 +34,26 @@ ul.navbar-nav {
 	display: inline-block;
 }
 
-.recipe-thumbnail .ingredient-list {
-	-webkit-line-clamp: 3; 
-   	line-height: 20px;
-   	height: 60px; 
-   	text-overflow: ellipsis;      
+.pic-and-title {
+	margin-top: 10px;
+	height: 100px;
 }
 
-.recipe-thumbnail h3 {
-	-webkit-line-clamp: 2; /* number of lines to show */
-   	line-height: 26px;        /* fallback */
-   	height: 52px;       /* fallback */
+.pic-and-title img {
+	padding-right: 10px;
+	display: inline;
+	float: left;
+}
+
+.pic-and-title h3 {
+   	display: inline;
+}
+
+hr.above-line {
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+hr.below-line {
+	margin-top: 10px;
 }

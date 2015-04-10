@@ -17,4 +17,26 @@ app.controller('SearchCtrl', function($scope, $http, $location)
             console.log(data);
         });
     }
+
+    $scope.formatIngredients = function(ingredients) {
+        var ingredientList = ingredients.join(", ");
+        var pWidth = $('.ingredient-list').width();
+        var charWidth = 2.45;
+        var maxChars = Math.floor(pWidth/charWidth);
+        if (ingredientList.length > maxChars) {
+            ingredientList = ingredientList.substring(0, maxChars-3);
+            var lastComma = ingredientList.lastIndexOf(",")
+            ingredientList = ingredientList.substring(0, lastComma);
+            ingredientList += "...";
+        }
+        return ingredientList;
+    }
+
+    $scope.formatTime = function(time) {
+        time = parseInt(time);
+        var hrs = Math.floor(time/3600);
+        var min = Math.floor((time%3600)/60);
+        var timeStr = hrs ? hrs + " hr, " + min + " min" : min + " min";
+        return timeStr;
+    }
 });
