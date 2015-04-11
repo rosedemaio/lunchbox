@@ -56,3 +56,26 @@ hr.above-line {
 hr.below-line {
 	margin-top: 10px;
 }
+
+.following-info {
+	width: 20%;
+}
+
+#collapseLink {
+	text-transform: uppercase;
+	color: gray;
+	cursor: pointer;
+}
+
+.number-following {
+	font-size: 20px;
+  	color: rgb(48, 141, 232);
+}
+
+.follow-button {
+	margin-top: 10px;
+}
+
+#followingCollapse ul {
+	list-style: none;
+}

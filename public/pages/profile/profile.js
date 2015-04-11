@@ -3,6 +3,15 @@ app.controller('ProfileCtrl', function ($scope, $http, $routeParams, $location)
 	var username = $routeParams.username;
 	$scope.isCurrentUser = $scope.$parent.user != '0' && username == $scope.$parent.user.username;
 
+    $('#followingCollapse').on('show.bs.collapse', function () {
+        $('#collapseLink span').removeClass('fa-chevron-up');
+        $('#collapseLink span').addClass('fa-chevron-down');
+    });
+    $('#followingCollapse').on('hide.bs.collapse', function () {
+        $('#collapseLink span').removeClass('fa-chevron-down');
+        $('#collapseLink span').addClass('fa-chevron-up');
+    });
+
 	$http.get('/user/' + username)
 	.success(function (user) {
 		if (!user) {
