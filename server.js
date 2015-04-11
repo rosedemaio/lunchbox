@@ -116,11 +116,24 @@ function insertNewUser(req, res, newuser)  {
 	});
 }        
 
-app.post('/follow', function (req, res) {
+app.put('/follow', function (req, res) {
 	var userToFollow = req.body;
 	User.findOne({username: req.user.username}, function (err, doc){
 		var following = doc.following;
 		following.push(userToFollow.username);
+		User.update({username: req.user.username}, {"following": following}, function (err, updatedDoc) {
+			req.user.following = following;
+			res.send(req.user);
+		});
+	});
+});
+
+app.put('/unfollow', function (req, res) {
+	var userToUnfollow = req.body;
+	User.findOne({username: req.user.username}, function (err, doc){
+		var following = doc.following;
+		var index = following.indexOf(userToUnfollow);
+		following.splice(index, 1);
 		User.update({username: req.user.username}, {"following": following}, function (err, updatedDoc) {
 			req.user.following = following;
 			res.send(req.user);

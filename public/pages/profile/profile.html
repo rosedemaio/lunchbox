@@ -3,10 +3,18 @@
 <h1>{{profileUser.username}}</h1>
 
 <div class="following-info" ng-show="profileUser">
-	<p>Following ({{(profileUser.following).length}})</p>
-	<span ng-repeat="followedUser in profileUser.following">
-		<a ng-attr-href="#/profile/{{followedUser}}" href="">{{followedUser}}</a>
-	</span>
+	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#followingCollapse" aria-expanded="false" aria-controls="followingCollapse">
+	 	Following ({{(profileUser.following).length}})
+	</button>
+	<div class="collapse" id="followingCollapse">
+	  	<div class="well">
+	    	<span ng-repeat="followedUser in profileUser.following">
+				<a ng-attr-href="#/profile/{{followedUser}}" href="">{{followedUser}}</a>
+				
+			</span>
+	  	</div>
+	</div>
 </div>
 
-<button class="btn btn-primary" ng-show="!isCurrentUser && $parent.user!='0' && profileUser" ng-click="follow()">Follow</button>
+<button class="btn btn-primary" ng-show="showFollow" ng-click="follow()">Follow</button>
+<button class="btn btn-primary" ng-show="showUnfollow" ng-click="unfollow()">Unfollow</button>
