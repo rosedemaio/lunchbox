@@ -49,7 +49,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a ng-show="user == '0'" href="#/login">Sign In</a></li>
                                 <li><a ng-show="user == '0'" href="#/signup">Sign Up</a></li>
-                                <li><span class="username-welcome" ng-show="user != '0'">Welcome, {{user.username}}</span></li>
+                                <li><a ng-show="user != '0'" ng-attr-href="#/profile/{{user.username}}">{{user.username}}'s Profile</a></li>
                                 <li><a ng-show="user != '0'" href="#" ng-click="logout()">Sign Out</a></li>
                             </ul>
                         </div>

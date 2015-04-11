@@ -5,7 +5,11 @@ app.controller('ProfileCtrl', function ($scope, $http, $routeParams, $location)
 
 	$http.get('/user/' + username)
 	.success(function (user) {
-        $scope.profileUser = user;
+		if (!user) {
+			$scope.errorMessage = "User " + username + " not found";
+		} else {
+			$scope.profileUser = user;
+		}
     })
     .error(function (data) {
     	$scope.errorMessage = data;

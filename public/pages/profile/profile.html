@@ -2,6 +2,11 @@
 
 <h1>{{profileUser.username}}</h1>
 
-<p>{{profileUser.following}}</p>
+<div class="following-info" ng-show="profileUser">
+	<p>Following ({{(profileUser.following).length}})</p>
+	<span ng-repeat="followedUser in profileUser.following">
+		<a ng-attr-href="#/profile/{{followedUser}}" href="">{{followedUser}}</a>
+	</span>
+</div>
 
-<button class="btn btn-primary" ng-show="!isCurrentUser && $parent.user!='0'" ng-click="follow()">Follow</button>
+<button class="btn btn-primary" ng-show="!isCurrentUser && $parent.user!='0' && profileUser" ng-click="follow()">Follow</button>
