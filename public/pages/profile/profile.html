@@ -1,28 +1,32 @@
 <p>{{errorMessage}}</p>
 
-<h1>{{profileUser.username}}</h1>
-
-<div class="following-info" ng-show="profileUser">
-	<hr/>
-	<div id="collapseLink" data-toggle="collapse" data-target="#followingCollapse" aria-expanded="false" aria-controls="followingCollapse">
-	 	Following 
-	 	<span class="number-following">({{(profileUser.following).length}})</span>
-	 	<span ng-show="(profileUser.following).length" class="fa fa-chevron-up" />
+<div class="profile-sidebar">
+	<h1>{{profileUser.username}}</h1>
+	<div class="following-info" ng-show="profileUser">
+		<hr/>
+		<div id="collapseLink" data-toggle="collapse" data-target="#followingCollapse" aria-expanded="false" aria-controls="followingCollapse">
+		 	Following 
+		 	<span class="number-following">({{(profileUser.following).length}})</span>
+		 	<span ng-show="(profileUser.following).length" class="fa fa-chevron-up" />
+		</div>
+		<div class="collapse" id="followingCollapse" ng-show="(profileUser.following).length">
+		  	<ul>
+		    	<li ng-repeat="followedUser in profileUser.following">
+					<a ng-attr-href="#/profile/{{followedUser}}">{{followedUser}}</a>
+				</li>
+		  	</ul>
+		</div>
 	</div>
-	<div class="collapse" id="followingCollapse" ng-show="(profileUser.following).length">
-	  	<ul>
-	    	<li ng-repeat="followedUser in profileUser.following">
-				<a ng-attr-href="#/profile/{{followedUser}}">{{followedUser}}</a>
-			</li>
-	  	</ul>
-	</div>
+	<button class="btn btn-primary follow-button" ng-show="showFollow" ng-click="follow()">
+		<span class="fa fa-user-plus"></span>
+		Follow
+	</button>
+	<button class="btn btn-default follow-button" ng-show="showUnfollow" ng-click="unfollow()">
+		<span class="fa fa-user-times"></span>
+		Unfollow
+	</button>
 </div>
-
-<button class="btn btn-primary follow-button" ng-show="showFollow" ng-click="follow()">
-	<span class="fa fa-user-plus"></span>
-	Follow
-</button>
-<button class="btn btn-default follow-button" ng-show="showUnfollow" ng-click="unfollow()">
-	<span class="fa fa-user-times"></span>
-	Unfollow
-</button>
+<div class="profile-reviews">
+	<h2 ng-show="profileUser.reviews">Reviews</h2>
+	<p class="no-reviews-message" ng-show="!(profileUser.reviews)">{{profileUser.username}} hasn't written any reviews.</p>
+</div>

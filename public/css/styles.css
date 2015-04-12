@@ -57,8 +57,21 @@ hr.below-line {
 	margin-top: 10px;
 }
 
-.following-info {
-	width: 20%;
+.profile-sidebar {
+	display: inline-table;
+  	border: 1px solid #eee;
+  	padding: 10px;
+  	border-radius: 7px;
+}
+
+.profile-reviews {
+	display: inline-table;
+  	margin-left: 10px;
+  	padding: 0px 10px;
+}
+
+.no-reviews-message {
+	color: gray;
 }
 
 #collapseLink {
