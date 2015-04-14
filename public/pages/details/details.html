@@ -1,11 +1,15 @@
-<h1> Recipe Details </h1>
-
-<div class="recipeDetail">
-	<h3> {{recipe.name}} </h3>
-	<img ng-attr-src="{{(recipe.images)[0].hostedLargeUrl}}" ng-attr-alt="{{recipe.name}}">
-	<ul>
-		<li ng-repeat="line in recipe.ingredientLines track by $index">
-		{{line}}
-		</li>
-	</ul>
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-8 col-md-6">
+            <h2> {{recipe.name}} </h2>
+            <ul>
+                <li ng-repeat="line in recipe.ingredientLines track by $index">
+                {{line}}
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-4 col-md-6">
+            <img class="center-block" ng-attr-src="{{(recipe.images)[0].hostedLargeUrl}}" ng-attr-alt="{{recipe.name}}">
+        </div>
+    </div>
 </div>
