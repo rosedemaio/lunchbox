@@ -1,8 +1,8 @@
 <p>{{errorMessage}}</p>
 
-<div class="profile-sidebar">
+<div ng-show="profileUser" class="profile-sidebar">
 	<h1>{{profileUser.username}}</h1>
-	<div class="following-info" ng-show="profileUser">
+	<div class="following-info">
 		<hr/>
 		<div id="collapseLink" data-toggle="collapse" data-target="#followingCollapse" aria-expanded="false" aria-controls="followingCollapse">
 		 	Following 
@@ -26,7 +26,7 @@
 		Unfollow
 	</button>
 </div>
-<div class="profile-reviews">
+<div ng-show="profileUser" class="profile-reviews">
 	<h2 ng-show="profileUser.reviews">Reviews</h2>
 	<div class="row" ng-show="profileUser.reviews">
 	    <div class="col-md-6" ng-repeat-start="review in profileUser.reviews">
