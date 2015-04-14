@@ -1,5 +1,21 @@
-app.controller('SearchCtrl', function($scope, $http, $location)
+app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
 {
+    var query = $routeParams.query;
+
+    // invoked when user clicks search button
+    // given recipe model that contains q property (query string)
+    $scope.encodeRecipeAndSearch = function (recipe) {
+        var encodedQuery = encodeURI(recipe.q);
+        $location.path("search/" + encodedQuery);
+    }
+
+    // invoked when URL with query string is hit
+    $scope.decodeQueryAndSearch = function (query) {
+        var recipe = { q: decodeURI(query) }
+        $scope.recipe = recipe;
+        $scope.search(recipe)
+    }
+
     $scope.search = function (recipe) {
         var params = {
             _app_id: "6e96cfda",
@@ -9,12 +25,15 @@ app.controller('SearchCtrl', function($scope, $http, $location)
         $.extend(params, recipe);
         $http.jsonp('http://api.yummly.com/v1/api/recipes?' + $.param(params))
         .success(function (response) {
-            console.log(response.matches);
             $scope.recipes = response.matches;
         })
         .error(function (data) {
             console.log(data);
         });
+    }
+
+    if (query) { 
+        $scope.decodeQueryAndSearch(query); 
     }
 
     $scope.formatIngredients = function(ingredients) {

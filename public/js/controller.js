@@ -43,6 +43,10 @@ app.config(['$routeProvider', function ($routeProvider) {
         templateUrl: '../pages/search/search.html',
         controller: 'SearchCtrl'
     }).
+    when('/search/:query', {
+        templateUrl: '../pages/search/search.html',
+        controller: 'SearchCtrl'
+    }).
     when('/my-recipes', {
         templateUrl: '../pages/my-recipes/my-recipes.html'
     }).
