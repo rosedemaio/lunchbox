@@ -102,3 +102,25 @@ hr.below-line {
 #followingCollapse ul {
 	list-style: none;
 }
+
+/* Details Page */
+.wrapper {
+	width: 80%;
+	margin: auto;
+}
+.details-pic {
+	margin-top: 24px;
+}
+
+.row .details {
+	margin-left: 0px;
+}
+
+.ingredients-list {
+	list-style: none;
+	padding-left: 15px;
+}
+
+.source-details {
+	margin-left: 15px;
+}

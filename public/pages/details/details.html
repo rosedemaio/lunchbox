@@ -1,15 +1,48 @@
 <div class="wrapper">
     <div class="row">
-        <div class="col-sm-8 col-md-6">
-            <h2> {{recipe.name}} </h2>
-            <ul>
+        <div class="col-sm-6 col-md-6">
+            <h1>{{recipe.name}} </h1>
+            <div class="row details">
+                <h4> Details </h4>
+                <div class="col-sm-4 col-md-4">
+                    <span ng-show="recipe.totalTime" class="fa fa-clock-o"> {{recipe.totalTime}} </span> <br>
+                    <span ng-show="recipe.attributes.course[0]" class="fa fa-spoon"> {{recipe.attributes.course[0]}}</span>
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    <span ng-show="recipe.attributes.cuisine[0]" class="fa fa-globe"> {{recipe.attributes.cuisine[0]}}</span> <br>
+                    <span ng-show="recipe.yield" class="fa fa-users"> {{recipe.yield}}</span>
+                </div>
+            </div>
+            <div class="row details">
+                <h4> Source </h4>
+                <p class="source-details"> 
+                    <a href="{{recipe.source.sourceSiteUrl}}"> {{recipe.source.sourceDisplayName}}</a> Food Blog <br>
+                    Read the full recipe with instructions <a href="{{recipe.source.sourceRecipeUrl}}"> here </a> 
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <img class="details-pic center-block" ng-attr-src="{{(recipe.images)[0].hostedLargeUrl}}" ng-attr-alt="{{recipe.name}}">
+        </div>
+    </div>
+    <br>
+    <hr>
+    <div class="row">
+        <div class="col-sm-5 col-md-5">
+            <h3> Ingredients </h3>
+            <ul class="ingredients-list">
                 <li ng-repeat="line in recipe.ingredientLines track by $index">
                 {{line}}
                 </li>
             </ul>
         </div>
-        <div class="col-sm-4 col-md-6">
-            <img class="center-block" ng-attr-src="{{(recipe.images)[0].hostedLargeUrl}}" ng-attr-alt="{{recipe.name}}">
+        <div class="col-sm-7 col-md-7">
+            <h3> Reviews </h3>
+            <div>
+                <div class="review" ng-repeat="review in reviews track by $index">
+                {{review}}
+                </div>
+            </div>
         </div>
     </div>
 </div>
