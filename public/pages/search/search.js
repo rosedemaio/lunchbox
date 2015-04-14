@@ -9,6 +9,7 @@ app.controller('SearchCtrl', function($scope, $http, $location)
         $.extend(params, recipe);
         $http.jsonp('http://api.yummly.com/v1/api/recipes?' + $.param(params))
         .success(function (response) {
+            console.log(response.matches);
             $scope.recipes = response.matches;
         })
         .error(function (data) {
@@ -17,14 +18,10 @@ app.controller('SearchCtrl', function($scope, $http, $location)
     }
 
     $scope.formatIngredients = function(ingredients) {
-        var ingredientList = ingredients.join(", ");
-        var pWidth = $('.ingredient-list').width();
-        var charWidth = 2.45;
-        var maxChars = Math.floor((pWidth-100)/charWidth);
-        if (ingredientList.length > maxChars) {
-            ingredientList = ingredientList.substring(0, maxChars-3);
-            var lastComma = ingredientList.lastIndexOf(",")
-            ingredientList = ingredientList.substring(0, lastComma);
+        var maxIngredients = 7;
+        var displayedIngredients = ingredients.slice(0,maxIngredients);
+        var ingredientList = displayedIngredients.join(", ");
+        if (ingredients.length > maxIngredients) {
             ingredientList += "...";
         }
         return ingredientList;
