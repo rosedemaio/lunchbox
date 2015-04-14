@@ -128,3 +128,6 @@ hr.below-line {
 .review {
     border-bottom: 1px solid #BBB;
 }
+.review-cta a {
+    font-size: 4px;
+}

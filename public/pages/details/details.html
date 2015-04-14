@@ -44,6 +44,18 @@
         </div>
         <div class="col-sm-7 col-md-7">
             <h3> Reviews </h3>
+            <a class="review-cta" ng-show="user == '0'" href="#/login" target="_blank"> sign in to write a review </a>
+            <div ng-show="user != '0'">
+                <h4>{{user.username}}'s Reivew</h4>
+                <form class="review-form" role="form">
+                    <div class="form-group">
+                        <input type="textarea" class="form-control" id="review" placeholder="Write your review here..." />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                   </div>
+                </form>
+            </div>
             <div>
                 <div class="review" ng-repeat="review in reviews track by $index">
                     <h4><a href="#/profile/{{review.user}}">{{review.user}}</a></h4>
