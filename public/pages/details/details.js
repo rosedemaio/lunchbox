@@ -20,12 +20,18 @@ app.controller("DetailsCtrl", function ($scope, $http, $routeParams, $location) 
     console.log(recipe)
     $scope.recipe = recipe;
 
-    $scope.reviews = [{"user":"test", 
+    $scope.reviews = [{"username":"test", 
                         "review":"This is a really great recipe! I love how delicious it is every time I make it."},
-                        {"user":"test2", 
+                        {"username":"test2", 
                         "review":" I love how delicious it is every time I make it. But i can't believe how simple it is to make!"}, 
-                        {"user":"Test3", 
+                        {"username":"Test3", 
                         "review":"Gross"},
-                        {"user":"Test", 
+                        {"username":"Test", 
                         "review":"THIS WAS THE BEST THING IN THE WORLD"}];
+
+    $scope.saveReview = function(review)
+    {
+        review.username = $scope.user.username;
+        $scope.reviews.push(review);
+    }
 });
