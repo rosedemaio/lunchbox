@@ -62,6 +62,10 @@ ul.navbar-nav {
 	background-size: cover;
 }
 
+.login {
+	width: 30%;
+}
+
 .recipe-search-input-group {
     width: 50%;
     margin: 30px auto;
