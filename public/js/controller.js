@@ -1,6 +1,6 @@
 var app = angular.module("LunchboxApp", ["ngRoute"]);
 
-app.controller('LunchboxController', function($scope, $http, $location)
+app.controller('LunchboxController', function($scope, $http, $location, $sce)
 {
     $http.get('/loggedin').success(function (user) {
         $scope.user = user;
@@ -12,6 +12,23 @@ app.controller('LunchboxController', function($scope, $http, $location)
 	        $location.url('/home');
 	    });
     };
+
+    // used in several places to render star ratings
+    // needs to be here to use in different views
+     $scope.setRating = function(rating) {
+        var i = 1;
+        var stars = '';
+        for(i; i <= 5; i++) {
+            if (i <= rating) {
+                stars += '<span class="fa fa-star"/>';
+            } else {
+                stars += '<span class="fa fa-star-o"/>';
+            }
+        }
+        return stars
+    }
+
+    $scope.trust = $sce.trustAsHtml;
 });
 
 app.config(['$routeProvider', function ($routeProvider) {

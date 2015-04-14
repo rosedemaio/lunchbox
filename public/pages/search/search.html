@@ -24,7 +24,7 @@
 		        <hr class="above-line"/>
 		        <span ng-show="recipe.totalTimeInSeconds" class="fa fa-clock-o"/>
 		        <span ng-show="recipe.totalTimeInSeconds">{{formatTime(recipe.totalTimeInSeconds)}}</span>
-		        <span ng-bind-html="trust(setRating(recipe.rating))" />
+		        <span ng-bind-html="$parent.trust($parent.setRating(recipe.rating))" />
 		    	<hr class="below-line"/>
 		        <p>
 		        	<a href="#" class="btn btn-primary" role="button">

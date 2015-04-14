@@ -32,9 +32,10 @@
 	    <div class="col-md-6" ng-repeat-start="review in profileUser.reviews">
 	    	<div class="thumbnail">
 	    		<div class="caption">
-			    	<h3><a ng-attr-href="#/details/{{review.recipeId}}">{{review.recipeName}}</a></h3>
+			    	<a ng-attr-href="#/recipe/{{review.recipeId}}"><h3>{{review.recipeName}}</h3></a>
 		      		<p>{{review.text}}</p>
 		      		<hr/>
+		      		<span ng-bind-html="$parent.trust($parent.setRating(review.rating))" />
 	      		</div>
 	    	</div>
 	    </div>
