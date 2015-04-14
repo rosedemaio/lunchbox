@@ -62,11 +62,11 @@ hr.below-line {
   	border: 1px solid #eee;
   	padding: 10px;
   	border-radius: 7px;
+  	margin-right: 10px;
 }
 
 .profile-reviews {
 	display: inline-table;
-  	margin-left: 10px;
   	padding: 0px 10px;
 }
 

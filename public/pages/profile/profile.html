@@ -28,5 +28,17 @@
 </div>
 <div class="profile-reviews">
 	<h2 ng-show="profileUser.reviews">Reviews</h2>
+	<div class="row" ng-show="profileUser.reviews">
+	    <div class="col-md-6" ng-repeat-start="review in profileUser.reviews">
+	    	<div class="thumbnail">
+	    		<div class="caption">
+			    	<h3><a ng-attr-href="#/details/{{review.recipeId}}">{{review.recipeName}}</a></h3>
+		      		<p>{{review.text}}</p>
+		      		<hr/>
+	      		</div>
+	    	</div>
+	    </div>
+	    <div ng-repeat-end=""></div>
+	</div>
 	<p class="no-reviews-message" ng-show="!(profileUser.reviews)">{{profileUser.username}} hasn't written any reviews.</p>
 </div>
