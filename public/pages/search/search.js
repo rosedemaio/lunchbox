@@ -1,5 +1,21 @@
-app.controller('SearchCtrl', function($scope, $http, $location)
+app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
 {
+    var query = $routeParams.query;
+
+    // invoked when user clicks search button
+    // given recipe model that contains q property (query string)
+    $scope.encodeRecipeAndSearch = function (recipe) {
+        var encodedQuery = encodeURI(recipe.q);
+        $location.path("search/" + encodedQuery);
+    }
+
+    // invoked when URL with query string is hit
+    $scope.decodeQueryAndSearch = function (query) {
+        var recipe = { q: decodeURI(query) }
+        $scope.recipe = recipe;
+        $scope.search(recipe)
+    }
+
     $scope.search = function (recipe) {
         var params = {
             _app_id: "6e96cfda",
@@ -16,15 +32,15 @@ app.controller('SearchCtrl', function($scope, $http, $location)
         });
     }
 
+    if (query) { 
+        $scope.decodeQueryAndSearch(query); 
+    }
+
     $scope.formatIngredients = function(ingredients) {
-        var ingredientList = ingredients.join(", ");
-        var pWidth = $('.ingredient-list').width();
-        var charWidth = 2.45;
-        var maxChars = Math.floor((pWidth-100)/charWidth);
-        if (ingredientList.length > maxChars) {
-            ingredientList = ingredientList.substring(0, maxChars-3);
-            var lastComma = ingredientList.lastIndexOf(",")
-            ingredientList = ingredientList.substring(0, lastComma);
+        var maxIngredients = 7;
+        var displayedIngredients = ingredients.slice(0,maxIngredients);
+        var ingredientList = displayedIngredients.join(", ");
+        if (ingredients.length > maxIngredients) {
             ingredientList += "...";
         }
         return ingredientList;

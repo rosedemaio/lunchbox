@@ -4,7 +4,7 @@
 <div class="input-group recipe-search-input-group">
   	<input placeholder='Enter your search terms here...' class="form-control" ng-model='recipe.q' type='text'/>
   	<span class="input-group-btn">
-	    <button class="btn btn-default" type="button" ng-click='search(recipe)'>
+	    <button class="btn btn-default" type="button" ng-click='encodeRecipeAndSearch(recipe)'>
 	    	<span class="fa fa-search"/>
 	    </button>
   	</span>
@@ -15,7 +15,7 @@
     	<div class="thumbnail recipe-thumbnail">
     		<div class="pic-and-title">
 	    		<img ng-attr-src="{{(recipe.imageUrlsBySize)[90]}}" ng-attr-alt="{{recipe.recipeName}}">
-	    		<a href="#/recipe/{{recipe.id}}"><h3>{{recipe.recipeName}}</h3></a>
+	    		<a href="#/recipe/{{recipe.id}}" target="_blank"><h3>{{recipe.recipeName}}</h3></a>
 	    		<p class="ingredient-list">
 		        	{{formatIngredients(recipe.ingredients)}}
 		        </p>
@@ -30,7 +30,7 @@
 		        	<a href="#" class="btn btn-primary" role="button">
 		        		<span class="fa fa-star" aria-hidden="true"></span>
 		        	</a> 
-		        	<a href="#/recipe/{{recipe.id}}" class="btn btn-default" role="button">
+		        	<a href="#/recipe/{{recipe.id}}" target="_blank" class="btn btn-default" role="button">
 		        		<span class="fa fa-info-circle" aria-hidden="true"></span>
 		        	</a>
 		        </p>
