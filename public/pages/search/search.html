@@ -1,18 +1,31 @@
-<h1> Search </h1>
+<h1> Search Recipes </h1>
 
 <br/>
-<input placeholder='Search...' ng-model='recipe.q' type='text'/><br/>
-<button ng-click='search(recipe)'>Search</button>
+<div class="input-group recipe-search-input-group">
+  	<input placeholder='Enter your search terms here...' class="form-control" ng-model='recipe.q' type='text'/>
+  	<span class="input-group-btn">
+	    <button class="btn btn-default" type="button" ng-click='search(recipe)'>
+	    	<span class="fa fa-search"/>
+	    </button>
+  	</span>
+</div>
 
 <div class="row" ng-show="recipes">
-    <div class="col-md-4" ng-repeat-start="recipe in recipes">
+    <div class="col-sm-6 col-md-4" ng-repeat-start="recipe in recipes">
     	<div class="thumbnail recipe-thumbnail">
-	    	<img ng-attr-src="{{(recipe.imageUrlsBySize)[90]}}" ng-attr-alt="{{recipe.recipeName}}">
-	      	<div class="caption">
-		        <h3>{{recipe.recipeName}}</h3>
-		        <p class="ingredient-list">
-		        	{{(recipe.ingredients).join(", ")}}
+    		<div class="pic-and-title">
+	    		<img ng-attr-src="{{(recipe.imageUrlsBySize)[90]}}" ng-attr-alt="{{recipe.recipeName}}">
+	    		<a href="#/recipe/{{recipe.id}}"><h3>{{recipe.recipeName}}</h3></a>
+	    		<p class="ingredient-list">
+		        	{{formatIngredients(recipe.ingredients)}}
 		        </p>
+	    	</div>
+	      	<div class="caption">
+		        <hr class="above-line"/>
+		        <span ng-show="recipe.totalTimeInSeconds" class="fa fa-clock-o"/>
+		        <span ng-show="recipe.totalTimeInSeconds">{{formatTime(recipe.totalTimeInSeconds)}}</span>
+		        <span ng-bind-html="$parent.trust($parent.setRating(recipe.rating))" />
+		    	<hr class="below-line"/>
 		        <p>
 		        	<a href="#" class="btn btn-primary" role="button">
 		        		<span class="fa fa-star" aria-hidden="true"></span>
@@ -24,6 +37,5 @@
 	      	</div>
     	</div>
     </div>
-    <div class="clearfix" ng-if="$index%3==2"></div>
     <div ng-repeat-end=""></div>
 </div>

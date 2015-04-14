@@ -26,7 +26,8 @@ mongoose.connect('mongodb://localhost/lunchbox');
 // User Schema and Model ----------------------------------
 var UserSchema = new mongoose.Schema({
 	username: String,
-	password: String
+	password: String,
+	following: [String]
 });
 var User = mongoose.model('User', UserSchema);
 var conn = mongoose.connection;
@@ -64,6 +65,17 @@ app.get('/users', auth, function (req, res) {
 	});
 });
 
+app.get('/user/:username', function (req, res) {
+	var username = req.params.username;
+	User.findOne({username: username}, function (err,docs) {
+		if (err) {
+			res.status(401).send('User ' + username + ' was not found');
+		} else {
+			res.json(docs);
+		}
+	});
+});
+
 app.get('/loggedin', function( req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');
 });
@@ -92,6 +104,7 @@ app.post('/register', function(req, res){
 });
 
 function insertNewUser(req, res, newuser)  {
+	newuser["following"] = [];
 	conn.collection('users').insert(newuser, function (err,docs) {
 		if (err) {
 			res.status(401).send('Error in registration');
@@ -102,6 +115,31 @@ function insertNewUser(req, res, newuser)  {
 		}
 	});
 }        
+
+app.put('/follow', function (req, res) {
+	var userToFollow = req.body;
+	User.findOne({username: req.user.username}, function (err, doc){
+		var following = doc.following;
+		following.push(userToFollow.username);
+		User.update({username: req.user.username}, {"following": following}, function (err, updatedDoc) {
+			req.user.following = following;
+			res.send(req.user);
+		});
+	});
+});
+
+app.put('/unfollow', function (req, res) {
+	var userToUnfollow = req.body;
+	User.findOne({username: req.user.username}, function (err, doc){
+		var following = doc.following;
+		var index = following.indexOf(userToUnfollow);
+		following.splice(index, 1);
+		User.update({username: req.user.username}, {"following": following}, function (err, updatedDoc) {
+			req.user.following = following;
+			res.send(req.user);
+		});
+	});
+});
 
 // Look for openshift port and ip first, if not, host locally
 var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';

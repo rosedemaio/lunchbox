@@ -3,7 +3,7 @@ body {
 	font-size: 14px;
 	color: #333;
 	margin: 0px;
-	margin-top: 60px;
+	margin-top: 80px;
 }
 
 nav a {
@@ -28,17 +28,13 @@ ul.navbar-nav {
 	margin-top: 8px;
 }
 
-.username-welcome {
-	padding-top: 15px;
-	padding-bottom: 15px;
-	display: inline-block;
+.navbar-toggle, .navbar-toggle .icon-bar {
+	border: 1px solid #BBB;
 }
 
-.recipe-thumbnail .ingredient-list {
-	-webkit-line-clamp: 3; 
-   	line-height: 20px;
-   	height: 60px; 
-   	text-overflow: ellipsis;      
+.recipe-search-input-group {
+	width: 50%;
+  	margin: 30px auto;
 }
 
 .recipe-thumbnail h3 {
@@ -47,6 +43,62 @@ ul.navbar-nav {
    	height: 52px;       /* fallback */
 }
 
-/*.recipeDetail {
-	width: 80%;
-}*/
+.pic-and-title {
+	margin-top: 10px;
+	height: 100px;
+}
+
+.pic-and-title img {
+	padding-right: 10px;
+	display: inline;
+	float: left;
+}
+
+.pic-and-title h3 {
+   	display: inline;
+}
+
+hr.above-line {
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+hr.below-line {
+	margin-top: 10px;
+}
+
+.profile-sidebar {
+	display: inline-table;
+  	border: 1px solid #eee;
+  	padding: 10px;
+  	border-radius: 7px;
+  	margin-right: 10px;
+}
+
+.profile-reviews {
+	display: inline-table;
+  	padding: 0px 10px;
+}
+
+.no-reviews-message {
+	color: gray;
+}
+
+#collapseLink {
+	text-transform: uppercase;
+	color: gray;
+	cursor: pointer;
+}
+
+.number-following {
+	font-size: 20px;
+  	color: rgb(48, 141, 232);
+}
+
+.follow-button {
+	margin-top: 10px;
+}
+
+#followingCollapse ul {
+	list-style: none;
+}
