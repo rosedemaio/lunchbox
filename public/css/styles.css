@@ -28,6 +28,10 @@ ul.navbar-nav {
 	margin-top: 8px;
 }
 
+.navbar-toggle, .navbar-toggle .icon-bar {
+	border: 1px solid #BBB;
+}
+
 .recipe-search-input-group {
 	width: 50%;
   	margin: 30px auto;
