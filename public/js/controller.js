@@ -7,10 +7,10 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
     });
 
     $scope.logout = function () {
-    	$http.post('/logout').success(function (response) {
-	        $scope.user = '0';
-	        $location.url('/home');
-	    });
+        $http.post('/logout').success(function (response) {
+            $scope.user = '0';
+            $location.url('/home');
+        });
     };
 
     // used in several places to render star ratings
