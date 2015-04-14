@@ -124,3 +124,7 @@ hr.below-line {
 .source-details {
 	margin-left: 15px;
 }
+
+.review {
+	border-bottom: 1px solid #BBB;
+}

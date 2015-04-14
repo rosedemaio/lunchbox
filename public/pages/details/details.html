@@ -40,7 +40,8 @@
             <h3> Reviews </h3>
             <div>
                 <div class="review" ng-repeat="review in reviews track by $index">
-                {{review}}
+                    <h4><a href="#/profile/{{review.user}}">{{review.user}}</a></h4>
+                    <p>{{review.review}}</p>
                 </div>
             </div>
         </div>

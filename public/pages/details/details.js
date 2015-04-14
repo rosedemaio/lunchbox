@@ -20,5 +20,12 @@ app.controller("DetailsCtrl", function ($scope, $http, $routeParams, $location) 
     console.log(recipe)
     $scope.recipe = recipe;
 
-    $scope.reviews = ["1", "2", "3", "4"];
+    $scope.reviews = [{"user":"test", 
+                        "review":"This is a really great recipe! I love how delicious it is every time I make it."},
+                        {"user":"test2", 
+                        "review":" I love how delicious it is every time I make it. But i can't believe how simple it is to make!"}, 
+                        {"user":"Test3", 
+                        "review":"Gross"},
+                        {"user":"Test", 
+                        "review":"THIS WAS THE BEST THING IN THE WORLD"}];
 });
