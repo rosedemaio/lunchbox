@@ -15,7 +15,7 @@
     	<div class="thumbnail recipe-thumbnail">
     		<div class="pic-and-title">
 	    		<img ng-attr-src="{{(recipe.imageUrlsBySize)[90]}}" ng-attr-alt="{{recipe.recipeName}}">
-	    		<h3>{{recipe.recipeName}}</h3>
+	    		<a href="#/recipe/{{recipe.id}}"><h3>{{recipe.recipeName}}</h3></a>
 	    		<p class="ingredient-list">
 		        	{{formatIngredients(recipe.ingredients)}}
 		        </p>
