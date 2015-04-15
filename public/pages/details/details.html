@@ -44,10 +44,10 @@
         </div>
         <div class="col-sm-7 col-md-7">
             <h3> Reviews </h3>
-            <a class="review-cta" ng-show="user == '0'" href="#/login" target="_blank"> sign in to write and see reviews </a>
+            <a class="review-cta" ng-show="user == '0'" href="#/login" target="_blank"> Sign in to write and see reviews </a>
             {{errorMessage}}
             <div ng-show="user != '0'">
-                <h4>{{user.username}}'s Reivew</h4>
+                <h4>{{user.username}}'s Review</h4>
                 <form class="review-form" role="form" ng-model="review.username">
                     <div class="form-group">
                         <input ng-model="review.text" type="textarea" class="form-control" id="review" placeholder="Write your review here..." />
