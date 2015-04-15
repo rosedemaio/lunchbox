@@ -25,6 +25,14 @@ app.controller('ProfileCtrl', function ($scope, $http, $routeParams, $location)
     	$scope.errorMessage = data;
     });
 
+    $http.get('/reviewsByUser/' + username)
+    .success(function (reviews) {
+        $scope.profileUser["reviews"] = reviews;
+    })
+    .error(function (data) {
+        $scope.errorMessage = data;
+    })
+
     $scope.follow = function() {
     	$http.put('/follow', $scope.profileUser)
         .success(function (response) {

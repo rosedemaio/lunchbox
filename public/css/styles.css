@@ -165,3 +165,10 @@ hr.below-line {
 .review-cta a {
     font-size: 4px;
 }
+
+.error-message {
+    color: red;
+}
+.success-message {
+    color: green;
+}
