@@ -11,7 +11,7 @@ app.controller("DetailsCtrl", function ($scope, $http, $routeParams, $location) 
             $scope.recipe = response;
         })
         .error(function (data) {
-            $scope.errorMessage = data;
+            $scope.message = data;
         });
     } 
     //$scope.getRecipe(recipeId);
@@ -20,10 +20,16 @@ app.controller("DetailsCtrl", function ($scope, $http, $routeParams, $location) 
     console.log(recipe)
     $scope.recipe = recipe;
 
-    $http.get("/reviews/" + recipeId)
-    .success( function(res) {
-        $scope.reviews = res;
-    });
+    $scope.refreshReviews = function()
+    {
+        $http.get("/reviews/" + recipeId)
+        .success( function(res) {
+            $scope.reviews = res;
+        });
+    }
+
+    //initial load of reviews
+    $scope.refreshReviews();
 
     $scope.saveReview = function(review)
     {
@@ -32,11 +38,19 @@ app.controller("DetailsCtrl", function ($scope, $http, $routeParams, $location) 
         review.recipeName = $scope.recipe.name;
         $http.post('/review', review)
         .success(function(response) {
-            console.log(response);
+            $scope.refreshReviews();
+            $scope.hideReivewForm();
         })
         .error(function(data) {
-            $scope.errorMessage = data;
+            $scope.message = data;
             console.log(data)
         });
+    }
+
+    $scope.hideReivewForm = function()
+    {
+        var reviewForm = $("#review-form");
+        reviewForm.hide();
+        $scope.message = "Thank you for submitting a review."
     }
 });

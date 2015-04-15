@@ -156,7 +156,8 @@ var ReviewSchema = new mongoose.Schema({
     text: String,
     username: String,
     recipeId: String,
-    recipeName: String
+    recipeName: String,
+    dateCreated: Date
 });
 
 var Review = mongoose.model('Review', ReviewSchema);
@@ -173,7 +174,7 @@ app.get('/reviews/:recipeId', function (req, res) {
 	var recipeId = req.params.recipeId;
     Review.find({recipeId: recipeId}, function (err,docs) {
         res.json(docs);
-    });
+    }).sort({dateCreated:-1});
 });
 
 // get all reviews by username (for profile pages)
@@ -181,12 +182,13 @@ app.get('/reviews/:username', function (req, res) {
 	var username = req.user.username;
     Review.find({username: username}, function (err,docs) {
         res.json(docs);
-    });
+    }).sort( {dateCreated: -1} );
 });
 
 // save a review from the details page
 app.post('/review', function(req, res){
     var review = req.body;
+    review["dateCreated"] = new Date();
     conn.collection('reviews').insert(review, function (err,docs) {
         if (err) {
             res.status(401).send('Problem saving review');
