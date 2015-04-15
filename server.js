@@ -71,10 +71,20 @@ app.get('/user/:username', function (req, res) {
         if (err) {
             res.status(401).send('User ' + username + ' was not found');
         } else {
-            res.json(docs);
+            attachUserReviews(docs, req, res);
         }
     });
 });
+
+function attachUserReviews(user, req, res) {
+    Review.find({username: user.username}, function (err,reviews) {
+        if (err) {
+            res.status(401).send('User ' + username + ' was not found');
+        } else {
+            res.json({user: user, reviews: reviews});
+        }
+    });
+}
 
 app.get('/loggedin', function( req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');
