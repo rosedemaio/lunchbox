@@ -20,7 +20,7 @@ app.controller("DetailsCtrl", function ($scope, $http, $routeParams, $location) 
     console.log(recipe)
     $scope.recipe = recipe;
 
-    $http.get("/reviews")
+    $http.get("/reviews/" + recipeId)
     .success( function(res) {
         $scope.reviews = res;
     });
