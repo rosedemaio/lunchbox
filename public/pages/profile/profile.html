@@ -27,17 +27,18 @@
 	</button>
 </div>
 <div ng-show="profileUser" class="profile-reviews">
-	<h2 ng-show="reviews">Reviews</h2>
-	<div class="row" ng-show="reviews">
-	    <div class="col-md-6" ng-repeat-start="review in reviews">
+	<h2 ng-show="profileUser.reviews">Reviews</h2>
+	<div class="row" ng-show="profileUser.reviews">
+	    <div class="col-md-6" ng-repeat-start="review in profileUser.reviews">
 	    	<div class="thumbnail">
 	    		<div class="caption">
 			    	<a ng-attr-href="#/recipe/{{review.recipeId}}"><h3>{{review.recipeName}}</h3></a>
 		      		<p>{{review.text}}</p>
+		      		<hr/>
 	      		</div>
 	    	</div>
 	    </div>
 	    <div ng-repeat-end=""></div>
 	</div>
-	<p class="no-reviews-message" ng-show="!(reviews)">{{profileUser.username}} hasn't written any reviews.</p>
+	<p class="no-reviews-message" ng-show="!(profileUser.reviews)">{{profileUser.username}} hasn't written any reviews.</p>
 </div>

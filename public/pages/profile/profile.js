@@ -13,13 +13,11 @@ app.controller('ProfileCtrl', function ($scope, $http, $routeParams, $location)
     });
 
 	$http.get('/user/' + username)
-	.success(function (response) {
-		if (!response) {
+	.success(function (user) {
+		if (!user) {
 			$scope.errorMessage = "User " + username + " not found";
 		} else {
-            console.log(response);
-			$scope.profileUser = response.user;
-            $scope.reviews = response.reviews;
+			$scope.profileUser = user;
 		}
 		setFollowButtons();
     })
