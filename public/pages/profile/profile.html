@@ -1,6 +1,6 @@
 <p>{{errorMessage}}</p>
 
-<div ng-show="profileUser" class="profile-sidebar">
+<div ng-show="profileUser" class="profile-section bordered-profile-section">
 	<h1>{{profileUser.username}}</h1>
 	<div class="following-info">
 		<hr/>
@@ -26,19 +26,16 @@
 		Unfollow
 	</button>
 </div>
-<div ng-show="profileUser" class="profile-reviews">
-	<h2 ng-show="reviews">Reviews</h2>
-	<div class="row" ng-show="reviews">
-	    <div class="col-md-6" ng-repeat-start="review in reviews">
-	    	<div class="thumbnail">
-	    		<div class="caption">
-			    	<a ng-attr-href="#/recipe/{{review.recipeId}}"><h3>{{review.recipeName}}</h3></a>
-		      		<p>{{review.text}}</p>
-		      		<hr/>
-	      		</div>
-	    	</div>
-	    </div>
-	    <div ng-repeat-end=""></div>
-	</div>
-	<p class="no-reviews-message" ng-show="!(reviews)">{{profileUser.username}} hasn't written any reviews.</p>
+<div ng-show="profileUser && reviews && reviews.length > 0" class="profile-section bordered-profile-section">
+	<h3>Reviews</h3>
+	<hr/>
+    <div ng-repeat-start="review in reviews">
+		<a ng-attr-href="#/recipe/{{review.recipeId}}">
+			<h4>{{review.recipeName}}</h4>
+		</a>
+	    <p>{{review.text}}</p>
+	    <hr/>
+    </div>
+    <div ng-repeat-end=""></div>
 </div>
+<p class="no-reviews-message profile-section" ng-show="!(reviews) || reviews.length == 0">{{profileUser.username}} hasn't written any reviews.</p>
