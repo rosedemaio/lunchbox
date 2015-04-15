@@ -27,7 +27,7 @@ app.controller('ProfileCtrl', function ($scope, $http, $routeParams, $location)
 
     $http.get('/reviewsByUser/' + username)
     .success(function (reviews) {
-        $scope.profileUser["reviews"] = reviews;
+        $scope.reviews = reviews;
     })
     .error(function (data) {
         $scope.errorMessage = data;
