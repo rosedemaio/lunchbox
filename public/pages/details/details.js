@@ -20,18 +20,23 @@ app.controller("DetailsCtrl", function ($scope, $http, $routeParams, $location) 
     console.log(recipe)
     $scope.recipe = recipe;
 
-    $scope.reviews = [{"username":"test", 
-                        "review":"This is a really great recipe! I love how delicious it is every time I make it."},
-                        {"username":"test2", 
-                        "review":" I love how delicious it is every time I make it. But i can't believe how simple it is to make!"}, 
-                        {"username":"Test3", 
-                        "review":"Gross"},
-                        {"username":"Test", 
-                        "review":"THIS WAS THE BEST THING IN THE WORLD"}];
+    $http.get("/reviews")
+    .success( function(res) {
+        $scope.reviews = res;
+    });
 
     $scope.saveReview = function(review)
     {
         review.username = $scope.user.username;
-        $scope.reviews.push(review);
+        review.recipeId = $scope.recipe.id;
+        review.recipeName = $scope.recipe.name;
+        $http.post('/review', review)
+        .success(function(response) {
+            console.log(response);
+        })
+        .error(function(data) {
+            $scope.errorMessage = data;
+            console.log(data)
+        });
     }
 });

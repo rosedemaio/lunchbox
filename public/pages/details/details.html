@@ -44,12 +44,13 @@
         </div>
         <div class="col-sm-7 col-md-7">
             <h3> Reviews </h3>
-            <a class="review-cta" ng-show="user == '0'" href="#/login" target="_blank"> sign in to write a review </a>
+            <a class="review-cta" ng-show="user == '0'" href="#/login" target="_blank"> sign in to write and see reviews </a>
+            {{errorMessage}}
             <div ng-show="user != '0'">
                 <h4>{{user.username}}'s Reivew</h4>
                 <form class="review-form" role="form" ng-model="review.username">
                     <div class="form-group">
-                        <input ng-model="review.review" type="textarea" class="form-control" id="review" placeholder="Write your review here..." />
+                        <input ng-model="review.text" type="textarea" class="form-control" id="review" placeholder="Write your review here..." />
                     </div>
                     <div class="form-group">
                         <button ng-click="saveReview(review)"type="submit" class="btn btn-primary">Submit</button>
@@ -59,7 +60,7 @@
             <div>
                 <div class="review" ng-repeat="review in reviews track by $index">
                     <h4><a href="#/profile/{{review.username}}">{{review.username}}</a></h4>
-                    <p>{{review.review}}</p>
+                    <p>{{review.text}}</p>
                 </div>
             </div>
         </div>

@@ -60,7 +60,7 @@ var auth = function (req, res, next) {
 };
 
 app.get('/users', auth, function (req, res) {
-    var users = User.find(function (err,docs) {
+    User.find(function (err,docs) {
         res.json(docs);
     });
 });
@@ -138,6 +138,35 @@ app.put('/unfollow', function (req, res) {
             req.user.following = following;
             res.send(req.user);
         });
+    });
+});
+
+// Review Schema and Model ----------------------------------
+var ReviewSchema = new mongoose.Schema({
+    text: String,
+    username: String,
+    recipeId: String,
+    recipeName: String
+});
+
+var Review = mongoose.model('Review', ReviewSchema);
+
+app.get('/reviews', auth, function (req, res) {
+    Review.find(function (err,docs) {
+        res.json(docs);
+    });
+});
+
+app.post('/review', function(req, res){
+    var review = req.body;
+    conn.collection('reviews').insert(review, function (err,docs) {
+        if (err) {
+            res.status(401).send('Problem saving review');
+        } else {
+            passport.authenticate('local')(req, res, function () {
+                res.send(req.user);
+            })
+        }
     });
 });
 
