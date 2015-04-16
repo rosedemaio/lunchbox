@@ -1,5 +1,6 @@
 <h1> Search Recipes </h1>
 
+<!-- Search input -->
 <br/>
 <div class="input-group recipe-search-input-group">
     <input placeholder='Enter your search terms here...' class="form-control" ng-model='recipe.q' type='text'/>
@@ -10,6 +11,7 @@
     </span>
 </div>
 
+<!-- Search results (uses Bootstrap thumbnails) -->
 <div class="row" ng-show="recipes">
     <div class="col-sm-6 col-md-4" ng-repeat-start="recipe in recipes">
         <div class="thumbnail recipe-thumbnail">

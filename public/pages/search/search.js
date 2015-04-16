@@ -1,5 +1,6 @@
 app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
 {
+    // the search query for the Yummly API call
     var query = $routeParams.query;
 
     // invoked when user clicks search button
@@ -10,12 +11,14 @@ app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
     }
 
     // invoked when URL with query string is hit
+    // i.e. #/search/cake -> search page with cake as seach term
     $scope.decodeQueryAndSearch = function (query) {
         var recipe = { q: decodeURI(query) }
         $scope.recipe = recipe;
         $scope.search(recipe)
     }
 
+    // actually calls the Yummly API with the query and params
     $scope.search = function (recipe) {
         var params = {
             _app_id: "6e96cfda",
@@ -32,10 +35,13 @@ app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
         });
     }
 
+    // if URL has search term (i.e. #/search/cake), decode it and search it
     if (query) { 
         $scope.decodeQueryAndSearch(query); 
     }
 
+    // Formats list of ingredients in search results 
+    // Displays no more than maxIngredients, cuts off with "..."
     $scope.formatIngredients = function(ingredients) {
         var maxIngredients = 7;
         var displayedIngredients = ingredients.slice(0,maxIngredients);
@@ -46,6 +52,8 @@ app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
         return ingredientList;
     }
 
+    // Formats recipe's given time (in seconds by default) 
+    // Displays as hours and minutes
     $scope.formatTime = function(time) {
         time = parseInt(time);
         var hrs = Math.floor(time/3600);
