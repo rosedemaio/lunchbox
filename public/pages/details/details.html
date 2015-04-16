@@ -1,4 +1,5 @@
 <div class="wrapper">
+    <!-- Row for short recipe details and headline image -->
     <div class="row">
         <div class="col-sm-6 col-md-6">
             <span>
@@ -7,7 +8,9 @@
                     <span class="fa fa-star" aria-hidden="true"></span>
                 </a> {{recipe.name}}
                 </h1>
+                <span ng-bind-html="$parent.trust($parent.setRating(recipe.rating))" />
             </span>
+            <!-- display total time, course, cuisine, and yeild -->
             <div class="row details">
                 <h4> Details </h4>
                 <div class="col-sm-4 col-md-4">
@@ -19,10 +22,11 @@
                     <span ng-show="recipe.yield" class="fa fa-users"> {{recipe.yield}}</span>
                 </div>
             </div>
+            <!-- Display source for recipe, which is the original blog link and recipe link -->
             <div class="row details">
                 <h4> Source </h4>
                 <p class="source-details"> 
-                    <a href="{{recipe.source.sourceSiteUrl}}"> {{recipe.source.sourceDisplayName}}</a> Food Blog <br>
+                    <a href="http://www.{{recipe.source.sourceSiteUrl}}"> {{recipe.source.sourceDisplayName}}</a> Food Blog <br>
                     Read the full recipe with instructions <a href="{{recipe.source.sourceRecipeUrl}}"> here </a> 
                 </p>
             </div>
@@ -33,6 +37,7 @@
     </div>
     <br>
     <hr>
+    <!-- New row for ingredients list and recipe user reviews -->
     <div class="row">
         <div class="col-sm-5 col-md-5">
             <h3> Ingredients </h3>
