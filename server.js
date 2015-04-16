@@ -52,6 +52,7 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 
+// check authentication before proceeding
 var auth = function (req, res, next) {
     if (!req.isAuthenticated())
         res.send(401);
@@ -59,12 +60,14 @@ var auth = function (req, res, next) {
         next();
 };
 
+// get all users in collection
 app.get('/users', auth, function (req, res) {
     User.find(function (err,docs) {
         res.json(docs);
     });
 });
 
+// get user doc by username
 app.get('/user/:username', function (req, res) {
     var username = req.params.username;
     User.findOne({username: username}, function (err,docs) {
@@ -76,19 +79,23 @@ app.get('/user/:username', function (req, res) {
     });
 });
 
+// check if user is logged in
 app.get('/loggedin', function( req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');
 });
-    
+
+// authenticate user
 app.post('/login', passport.authenticate('local'), function (req, res) {
     res.send(req.user);
 });
 
+// logout user
 app.post('/logout', function (req, res) {
     req.logOut();
     res.send(200);
 }); 
 
+// register a new user in the user collection
 app.post('/register', function(req, res){
     var newuser = req.body;
     User.findOne({username: newuser.username}, function (err,docs) {
@@ -103,6 +110,7 @@ app.post('/register', function(req, res){
     });
 });
 
+// helper to actually insert the new user
 function insertNewUser(req, res, newuser)  {
     newuser["following"] = [];
     conn.collection('users').insert(newuser, function (err,docs) {
@@ -114,8 +122,10 @@ function insertNewUser(req, res, newuser)  {
             })
         }
     });
-}        
+}
 
+// follow a user
+// put userToFollow in this user's "Following" array
 app.put('/follow', function (req, res) {
     var userToFollow = req.body;
     User.findOne({username: req.user.username}, function (err, doc){
@@ -128,6 +138,8 @@ app.put('/follow', function (req, res) {
     });
 });
 
+// unfollow a user
+// remove userToUnfollow from this user's "Following" array
 app.put('/unfollow', function (req, res) {
     var userToUnfollow = req.body;
     User.findOne({username: req.user.username}, function (err, doc){
