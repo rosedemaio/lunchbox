@@ -2,10 +2,12 @@ var app = angular.module("LunchboxApp", ["ngRoute"]);
 
 app.controller('LunchboxController', function($scope, $http, $location, $sce)
 {
+    // First check if there is a currently logged in user
     $http.get('/loggedin').success(function (user) {
         $scope.user = user;
     });
 
+    // Logs out user, sets user to 0 and redirects to home
     $scope.logout = function () {
         $http.post('/logout').success(function (response) {
             $scope.user = '0';
@@ -28,9 +30,12 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
         return stars
     }
 
+    // Allows angular to insert html into views
+    // Needed for setRating
     $scope.trust = $sce.trustAsHtml;
 });
 
+// Routing!!!
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
     when('/home', {
