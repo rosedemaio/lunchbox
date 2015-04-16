@@ -36,9 +36,6 @@ app.config(['$routeProvider', function ($routeProvider) {
     when('/home', {
         templateUrl: '../pages/home/home.html'
     }).
-    when('/browse', {
-        templateUrl: '../pages/browse/browse.html'
-    }).
     when('/search', {
         templateUrl: '../pages/search/search.html',
         controller: 'SearchCtrl'
