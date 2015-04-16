@@ -1,7 +1,9 @@
 <p>{{errorMessage}}</p>
 
+<!-- Username, following info, follow/unfollow button -->
 <div ng-show="profileUser" class="profile-section bordered-profile-section">
 	<h1>{{profileUser.username}}</h1>
+	<!-- Who profileUser is following -->
 	<div class="following-info">
 		<hr/>
 		<div id="collapseLink" data-toggle="collapse" data-target="#followingCollapse" aria-expanded="false" aria-controls="followingCollapse">
@@ -26,6 +28,8 @@
 		Unfollow
 	</button>
 </div>
+
+<!-- User's reviews -->
 <div ng-show="profileUser && reviews && reviews.length > 0" class="profile-section bordered-profile-section">
 	<h3>Reviews</h3>
 	<hr/>
