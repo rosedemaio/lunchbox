@@ -3,7 +3,7 @@
 <!-- Search input -->
 <br/>
 <div class="input-group recipe-search-input-group">
-    <input placeholder='Enter your search terms here...' class="form-control" ng-model='recipe.q' type='text'/>
+    <input placeholder='Enter your search terms here...' class="form-control" ng-model='recipe.q' type='text' ng-keyup="searchBarKeypress($event, recipe)"/>
     <span class="input-group-btn">
         <button class="btn btn-default" type="button" ng-click='encodeRecipeAndSearch(recipe)'>
             <span class="fa fa-search"/>

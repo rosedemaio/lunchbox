@@ -35,6 +35,12 @@ app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
         });
     }
 
+    $scope.searchBarKeypress = function ($event, recipe) {
+        if ($event.keyCode == 13) {
+            $scope.encodeRecipeAndSearch(recipe);
+        }
+    }
+
     // if URL has search term (i.e. #/search/cake), decode it and search it
     if (query) { 
         $scope.decodeQueryAndSearch(query); 
