@@ -58,6 +58,7 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
         return defer;
     }
 
+    // When user "favorites" or likes a recipe
     $scope.favoriteRecipe = function (recipe) {
         if ($scope.user == '0') {
             $('#notLoggedInDialog').modal('show');
@@ -71,6 +72,14 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
             .success(function (response) {
                 $scope.user = response;
             });
+        });
+    }
+
+    // When user "unfavorites" or unlikes a recipe
+    $scope.unfavoriteRecipe = function (recipeId) {
+        $http.put('/unfavorite', recipeId)
+        .success(function (response) {
+            $scope.user = response;
         });
     }
 
