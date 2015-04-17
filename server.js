@@ -81,7 +81,7 @@ app.get('/user/:username', function (req, res) {
 });
 
 // check if user is logged in
-app.get('/loggedin', function( req, res) {
+app.get('/loggedin', function (req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');
 });
 
@@ -214,6 +214,18 @@ var RecipeSchema = new mongoose.Schema({
 
 var Recipe = mongoose.model('Recipe', RecipeSchema);
 
+// get favorite recipes for a user
+app.get('/recipes', function (req, res) {
+    var favorites = req.user.favorites;
+    var recipes = [];
+    $.each(favorites, function (i, favorite) {
+        Recipe.findOne({recipeId: favorite.recipeId}, function (err, doc){
+            recipes.push(doc)
+        });
+    });
+    res.json(recipes)
+})
+
 // favorite a recipe
 // put recipeId in this user's "favorites" array and save recipe if needed
 // add the recipe to the recipe collection if it's not already there
@@ -258,11 +270,11 @@ function insertNewRecipe(req, res, recipeToFavorite)  {
 // remove recipeToUnfavorite from this user's "Favorites" array
 // don't remove recipe from the recipe collection
 app.put('/unfavorite', function (req, res) {
-    var recipeToUnfavorite = req.body;
+    var recipeIdToUnfavorite = req.body;
     // find the user and remove the recipe
     User.findOne({username: req.user.username}, function (err, doc){
         var favorites = doc.favorites;
-        var index = favorites.indexOf(recipeToUnfavorite);
+        var index = favorites.indexOf(recipeIdToUnfavorite);
         favorites.splice(index, 1);
         // update user with new favorites array
         User.update({username: req.user.username}, {"favorites": favorites}, function (err, updatedDoc) {
