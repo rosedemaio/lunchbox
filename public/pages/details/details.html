@@ -4,9 +4,13 @@
         <div class="col-sm-6 col-md-6">
             <span>
                 <h1>
-                <a href="#" class="btn btn-primary" role="button">
+                <a class="btn btn-primary" role="button" ng-click="$parent.favoriteRecipe(recipe)" ng-show="$parent.user.favorites.indexOf(recipe.id) == -1">
                     <span class="fa fa-star" aria-hidden="true"></span>
-                </a> {{recipe.name}}
+                </a> 
+                <a class="btn btn-warning" role="button" ng-show="$parent.user.favorites.indexOf(recipe.id) != -1">
+                    <span class="fa fa-star-o" aria-hidden="true"></span>
+                </a>
+                {{recipe.name}}
                 </h1>
                 <span ng-bind-html="$parent.trust($parent.setRating(recipe.rating))" />
             </span>
