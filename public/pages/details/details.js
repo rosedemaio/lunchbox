@@ -59,4 +59,5 @@ app.controller("DetailsCtrl", function ($scope, $http, $routeParams, $location) 
         $scope.errorMessage = ""
         $scope.successMessage = "Thank you for submitting a review."
     }
+
 });

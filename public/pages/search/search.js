@@ -3,6 +3,22 @@ app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
     // the search query for the Yummly API call
     var query = $routeParams.query;
 
+    // Prep recipe to match Recipe schema in db
+    $scope.deferredSerializeRecipe = function (recipe) {
+        var defer = $.Deferred();
+            var params = {
+            _app_id: "6e96cfda",
+            _app_key: "555f5bd10dffba7229ea6a9ec32c0705",
+            callback: "JSON_CALLBACK"
+        }
+        $http.jsonp("http://api.yummly.com/v1/api/recipe/" + recipe.id + "?" + $.param(params))
+        .success(function (fullRecipe) {
+            var serializedRecipe = $scope.$parent.serializeRecipe(fullRecipe);
+            defer.resolve(serializedRecipe);
+        });
+        return defer;
+    }
+
     // invoked when user clicks search button
     // given recipe model that contains q property (query string)
     $scope.encodeRecipeAndSearch = function (recipe) {
