@@ -3,7 +3,8 @@ app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
     // the search query for the Yummly API call
     var query = $routeParams.query;
 
-    // Prep recipe to match Recipe schema in db
+    // override the parent controller's deferredSerializeRecipe
+    // because we have to make a special API call
     $scope.deferredSerializeRecipe = function (recipe) {
         var defer = $.Deferred();
             var params = {

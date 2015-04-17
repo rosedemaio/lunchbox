@@ -48,6 +48,10 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
         }
     }
 
+    // Recipe serialization needs to be deferred
+    // In some cases, an API call will need to be made to get more info
+    // The defer makes the favoriting process wait for the serialization
+    // and API calls before storing the favorited recipe in the db
     $scope.deferredSerializeRecipe = function (recipe) {
         var defer = $.Deferred();
         defer.resolve($scope.serializeRecipe(recipe));
@@ -59,6 +63,7 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
             $('#notLoggedInDialog').modal('show');
             return;
         }
+        // child controller may want to override deferredSerializeRecipe, i.e. search
         var serializeRecipe = $scope.$$childHead.deferredSerializeRecipe || $scope.deferredSerializeRecipe;
         serializeRecipe(recipe).done(function (resp) {
             recipe = resp;
