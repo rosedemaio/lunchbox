@@ -33,6 +33,35 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
     // Allows angular to insert html into views
     // Needed for setRating
     $scope.trust = $sce.trustAsHtml;
+
+    // Prep recipe to match Recipe schema in db
+    $scope.serializeRecipe = function (recipe) {
+        return {
+            image: (recipe.images[0].imageUrlsBySize)["90"],
+            ingredients: recipe.ingredientLines,
+            recipeId: recipe.id,
+            recipeName: recipe.name,
+            rating: recipe.rating,
+            timeInSeconds: recipe.totalTimeInSeconds,
+            sourceUrl: recipe.source.sourceRecipeUrl
+        }
+    }
+
+    $scope.favoriteRecipe = function (recipe) {
+        if ($scope.user == '0') {
+            $('#notLoggedInDialog').modal('show');
+            return;
+        }
+        recipe = $scope.serializeRecipe(recipe);
+        $http.put('/favorite', recipe)
+        .success(function (response) {
+            $scope.user = response;
+        });
+    }
+
+    $('.sign-in-up-buttons').click(function (e) {
+        $('#notLoggedInDialog').modal('hide');
+    });
 });
 
 // Routing!!!

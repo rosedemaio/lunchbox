@@ -233,12 +233,12 @@ app.put('/favorite', function (req, res) {
     Recipe.findOne({recipeId: recipeToFavorite.recipeId}, function (err, doc){
         // if there is an error, return error code
         // if docs exist, that means the recipe already exists in the collection so we don't add it again 
-        if (err || docs) {
+        if (err || doc) {
             if (err) {
                 res.status(401).send('There was a problem fetching the recipe:' + recipeToFavorite.recipeName);
             }
         } else { // otherwise we want to add it
-            insertNewRecipe(recipeToFavorite);
+            insertNewRecipe(req, res, recipeToFavorite);
         }
     });
 });
@@ -248,8 +248,6 @@ function insertNewRecipe(req, res, recipeToFavorite)  {
     conn.collection('recipes').insert(recipeToFavorite, function (err,docs) {
         if (err) {
             res.status(401).send('Error saving recipe:' + recipeToFavorite.recipeName);
-        } else {
-            res.json(docs);
         }
     });
 }

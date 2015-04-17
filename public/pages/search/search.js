@@ -35,6 +35,7 @@ app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
         });
     }
 
+    // Sets key event for when user presses enter after entering search term
     $scope.searchBarKeypress = function ($event, recipe) {
         if ($event.keyCode == 13) {
             $scope.encodeRecipeAndSearch(recipe);

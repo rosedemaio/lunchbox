@@ -60,6 +60,27 @@
             <!-- other views will control the body of the page -->
             <main ng-view>
             </main>
+            <!-- Pop up dialog when user tries to favorite recipe without loggin in -->
+            <div class="modal fade" id="notLoggedInDialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        <h4 class="modal-title">Please Log In</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Please sign in or sign up as a new user to favorite recipes.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <a href="#/login" class="btn btn-default sign-in-up-buttons">Sign In</a>
+                            <a href="#/signup" class="btn btn-primary sign-in-up-buttons">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
