@@ -64,26 +64,4 @@ app.controller('SearchCtrl', function($scope, $http, $location, $routeParams)
         $scope.decodeQueryAndSearch(query); 
     }
 
-    // Formats list of ingredients in search results 
-    // Displays no more than maxIngredients, cuts off with "..."
-    $scope.formatIngredients = function(ingredients) {
-        var maxIngredients = 7;
-        var displayedIngredients = ingredients.slice(0,maxIngredients);
-        var ingredientList = displayedIngredients.join(", ");
-        if (ingredients.length > maxIngredients) {
-            ingredientList += "...";
-        }
-        return ingredientList;
-    }
-
-    // Formats recipe's given time (in seconds by default) 
-    // Displays as hours and minutes
-    $scope.formatTime = function(time) {
-        time = parseInt(time);
-        var hrs = Math.floor(time/3600);
-        var min = Math.floor((time%3600)/60);
-        var timeStr = hrs ? hrs + " hr, " + min + " min" : min + " min";
-        return timeStr;
-    }
-
 });
