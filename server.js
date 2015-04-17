@@ -9,10 +9,10 @@ var multer     = require('multer');
 
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
-
 var mongoose = require('mongoose');
 
 app.use(cookieParser())
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: 'this is the secret' }));
@@ -217,14 +217,10 @@ var Recipe = mongoose.model('Recipe', RecipeSchema);
 // get favorite recipes for a user
 app.get('/recipes', function (req, res) {
     var favorites = req.user.favorites;
-    var recipes = [];
-    $.each(favorites, function (i, favorite) {
-        Recipe.findOne({recipeId: favorite.recipeId}, function (err, doc){
-            recipes.push(doc)
-        });
-    });
-    res.json(recipes)
-})
+    Recipe.where('recipeId').in(favorites).exec(function(err, docs){
+        res.json(docs);
+    })
+});
 
 // favorite a recipe
 // put recipeId in this user's "favorites" array and save recipe if needed
@@ -236,6 +232,7 @@ app.put('/favorite', function (req, res) {
         var favorites = doc.favorites;
         favorites.push(recipeToFavorite.recipeId);
         // update the user with new favorites array
+
         User.update({username: req.user.username}, {"favorites": favorites}, function (err, updatedDoc) {
             req.user.favorites = favorites;
             res.send(req.user);
