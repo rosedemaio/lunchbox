@@ -49,7 +49,6 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
         var hrs = Math.floor(time/3600);
         var min = Math.floor((time%3600)/60);
         var timeStr = hrs ? hrs + " hr, " + min + " min" : min + " min";
-        console.log(timeStr);
         return timeStr;
     }
 
