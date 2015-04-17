@@ -27,7 +27,8 @@ mongoose.connect('mongodb://localhost/lunchbox');
 var UserSchema = new mongoose.Schema({
     username: String,
     password: String,
-    following: [String]
+    following: [String],
+    favorites: [String]
 });
 var User = mongoose.model('User', UserSchema);
 var conn = mongoose.connection;
@@ -197,6 +198,77 @@ app.post('/review', function(req, res){
         } else {
             res.json(docs);
         }
+    });
+});
+
+// Favorite RecipeSchema and Model ----------------------------------
+var RecipeSchema = new mongoose.Schema({
+    image: String,
+    ingredients: [String],
+    recipeId: String,
+    recipeName: String,
+    rating: Number,
+    timeInSeconds: Number,
+    sourceUrl: String
+});
+
+var Recipe = mongoose.model('Recipe', RecipeSchema);
+
+// favorite a recipe
+// put recipeId in this user's "favorites" array and save recipe if needed
+// add the recipe to the recipe collection if it's not already there
+app.put('/favorite', function (req, res) {
+    var recipeToFavorite = req.body;
+    // find the user and add the recipe
+    User.findOne({username: req.user.username}, function (err, doc){
+        var favorites = doc.favorites;
+        favorites.push(recipeToFavorite.recipeId);
+        // update the user with new favorites array
+        User.update({username: req.user.username}, {"favorites": favorites}, function (err, updatedDoc) {
+            req.user.favorites = favorites;
+            res.send(req.user);
+        });
+    });
+    // we also need to add the recipe to the recipe collection
+    Recipe.findOne({recipeId: recipeToFavorite.recipeId}, function (err, doc){
+        // if there is an error, return error code
+        // if docs exist, that means the recipe already exists in the collection so we don't add it again 
+        if (err || docs) {
+            if (err) {
+                res.status(401).send('There was a problem fetching the recipe:' + recipeToFavorite.recipeName);
+            }
+        } else { // otherwise we want to add it
+            insertNewRecipe(recipeToFavorite);
+        }
+    });
+});
+
+// helper to insert new recipe
+function insertNewRecipe(req, res, recipeToFavorite)  {
+    conn.collection('recipes').insert(recipeToFavorite, function (err,docs) {
+        if (err) {
+            res.status(401).send('Error saving recipe:' + recipeToFavorite.recipeName);
+        } else {
+            res.json(docs);
+        }
+    });
+}
+
+// unfavorite a recipe
+// remove recipeToUnfavorite from this user's "Favorites" array
+// don't remove recipe from the recipe collection
+app.put('/unfavorite', function (req, res) {
+    var recipeToUnfavorite = req.body;
+    // find the user and remove the recipe
+    User.findOne({username: req.user.username}, function (err, doc){
+        var favorites = doc.favorites;
+        var index = favorites.indexOf(recipeToUnfavorite);
+        favorites.splice(index, 1);
+        // update user with new favorites array
+        User.update({username: req.user.username}, {"favorites": favorites}, function (err, updatedDoc) {
+            req.user.favorites = favorites;
+            res.send(req.user);
+        });
     });
 });
 
