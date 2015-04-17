@@ -31,6 +31,27 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
         return stars
     }
 
+    // Formats list of ingredients in search results 
+    // Displays no more than maxIngredients, cuts off with "..."
+    $scope.formatIngredients = function(ingredients, maxIngredients) {
+        var displayedIngredients = ingredients.slice(0,maxIngredients);
+        var ingredientList = displayedIngredients.join(", ");
+        if (ingredients.length > maxIngredients) {
+            ingredientList += "...";
+        }
+        return ingredientList;
+    }
+
+    // Formats recipe's given time (in seconds by default) 
+    // Displays as hours and minutes
+    $scope.formatTime = function(time) {
+        time = parseInt(time);
+        var hrs = Math.floor(time/3600);
+        var min = Math.floor((time%3600)/60);
+        var timeStr = hrs ? hrs + " hr, " + min + " min" : min + " min";
+        return timeStr;
+    }
+
     // Allows angular to insert html into views
     // Needed for setRating
     $scope.trust = $sce.trustAsHtml;
@@ -121,6 +142,10 @@ app.config(['$routeProvider', function ($routeProvider) {
     when('/recipe/:recipeId', {
         templateUrl: '../pages/details/details.html',
         controller: 'DetailsCtrl'
+    }).
+    when('/my-recipes', {
+        templateUrl: '../pages/my-recipes/my-recipes.html',
+        controller: 'MyRecipesCtrl'
     }).
     otherwise({
         redirectTo: '/home'

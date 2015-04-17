@@ -1,1 +1,31 @@
-<p> my recipes </p>
+<h1> My Recipes </h1>
+
+<div class="row" ng-show="recipes">
+    <div class="col-sm-6 col-md-4" ng-repeat-start="recipe in recipes">
+        <div class="thumbnail recipe-thumbnail">
+            <div class="pic-and-title">
+                <img ng-attr-src="{{recipe.image}}" ng-attr-alt="{{recipe.recipeName}}">
+                <a href="#/recipe/{{recipe.recipeId}}" target="_blank"><h3>{{recipe.recipeName}}</h3></a>
+                <p class="ingredient-list">
+                    {{$parent.formatIngredients(recipe.ingredients, 3)}}
+                </p>
+            </div>
+            <div class="caption">
+                <hr class="above-line"/>
+                <span ng-show="recipe.timeInSeconds" class="fa fa-clock-o"/>
+                <span ng-show="recipe.timeInSeconds">{{$parent.formatTime(recipe.timeInSeconds)}}</span>
+                <span ng-bind-html="$parent.trust($parent.setRating(recipe.rating))" />
+                <hr class="below-line"/>
+                <p>
+                    <a class="btn btn-warning" role="button" ng-click="$parent.unfavoriteRecipe(recipe.id)">
+                        <span class="fa fa-star-o" aria-hidden="true"></span>
+                    </a>
+                    <a href="#/recipe/{{recipe.recipeId}}" target="_blank" class="btn btn-default" role="button">
+                        <span class="fa fa-info-circle" aria-hidden="true"></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div ng-repeat-end=""></div>
+</div>

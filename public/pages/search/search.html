@@ -19,20 +19,20 @@
                 <img ng-attr-src="{{(recipe.imageUrlsBySize)[90]}}" ng-attr-alt="{{recipe.recipeName}}">
                 <a href="#/recipe/{{recipe.id}}" target="_blank"><h3>{{recipe.recipeName}}</h3></a>
                 <p class="ingredient-list">
-                    {{formatIngredients(recipe.ingredients)}}
+                    {{$parent.formatIngredients(recipe.ingredients, 7)}}
                 </p>
             </div>
             <div class="caption">
                 <hr class="above-line"/>
                 <span ng-show="recipe.totalTimeInSeconds" class="fa fa-clock-o"/>
-                <span ng-show="recipe.totalTimeInSeconds">{{formatTime(recipe.totalTimeInSeconds)}}</span>
+                <span ng-show="recipe.totalTimeInSeconds">{{$parent.formatTime(recipe.totalTimeInSeconds)}}</span>
                 <span ng-bind-html="$parent.trust($parent.setRating(recipe.rating))" />
                 <hr class="below-line"/>
                 <p>
-                    <a class="btn btn-primary" role="button" ng-click="$parent.favoriteRecipe(recipe)" ng-show="$parent.user.favorites.indexOf(recipe.id) == -1">
+                    <a class="btn btn-primary" role="button" ng-click="$parent.favoriteRecipe(recipe)" ng-show="$parent.user=='0' || $parent.user.favorites.indexOf(recipe.id) == -1">
                         <span class="fa fa-star" aria-hidden="true"></span>
                     </a>
-                    <a class="btn btn-warning" role="button" ng-click="$parent.unfavoriteRecipe(recipe.id)" ng-show="$parent.user.favorites.indexOf(recipe.id) != -1">
+                    <a class="btn btn-warning" role="button" ng-click="$parent.unfavoriteRecipe(recipe.id)" ng-show="$parent.user!='0' && $parent.user.favorites.indexOf(recipe.id) != -1">
                         <span class="fa fa-star-o" aria-hidden="true"></span>
                     </a>
                     <a href="#/recipe/{{recipe.id}}" target="_blank" class="btn btn-default" role="button">
