@@ -102,6 +102,9 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
         $http.put('/unfavorite', recipeIdJSON)
         .success(function (response) {
             $scope.user = response;
+            if ($scope.$$childHead.getFavoriteRecipes) {
+                $scope.$$childHead.getFavoriteRecipes();
+            }
         });
     }
 

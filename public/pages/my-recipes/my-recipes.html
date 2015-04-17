@@ -17,7 +17,7 @@
                 <span ng-bind-html="$parent.trust($parent.setRating(recipe.rating))" />
                 <hr class="below-line"/>
                 <p>
-                    <a class="btn btn-warning" role="button" ng-click="$parent.unfavoriteRecipe(recipe.id)">
+                    <a class="btn btn-warning" role="button" ng-click="$parent.unfavoriteRecipe(recipe.recipeId)">
                         <span class="fa fa-star-o" aria-hidden="true"></span>
                     </a>
                     <a href="#/recipe/{{recipe.recipeId}}" target="_blank" class="btn btn-default" role="button">
