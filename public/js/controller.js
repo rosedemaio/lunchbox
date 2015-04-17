@@ -121,6 +121,10 @@ app.config(['$routeProvider', function ($routeProvider) {
         templateUrl: '../pages/details/details.html',
         controller: 'DetailsCtrl'
     }).
+    when('/my-recipes', {
+        templateUrl: '../pages/my-recipes/my-recipes.html',
+        controller: 'MyRecipesCtrl'
+    }).
     otherwise({
         redirectTo: '/home'
     });
