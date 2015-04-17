@@ -269,7 +269,7 @@ app.put('/unfavorite', function (req, res) {
     // find the user and remove the recipe
     User.findOne({username: req.user.username}, function (err, doc){
         var favorites = doc.favorites;
-        var index = favorites.indexOf(recipeIdToUnfavorite);
+        var index = favorites.indexOf(recipeIdToUnfavorite.recipeId);
         favorites.splice(index, 1);
         // update user with new favorites array
         User.update({username: req.user.username}, {"favorites": favorites}, function (err, updatedDoc) {

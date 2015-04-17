@@ -77,7 +77,8 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
 
     // When user "unfavorites" or unlikes a recipe
     $scope.unfavoriteRecipe = function (recipeId) {
-        $http.put('/unfavorite', recipeId)
+        var recipeIdJSON = {recipeId : recipeId};
+        $http.put('/unfavorite', recipeIdJSON)
         .success(function (response) {
             $scope.user = response;
         });
