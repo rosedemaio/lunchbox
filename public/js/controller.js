@@ -2,6 +2,7 @@ var app = angular.module("LunchboxApp", ["ngRoute"]);
 
 app.controller('LunchboxController', function($scope, $http, $location, $sce)
 {
+
     // First check if there is a currently logged in user
     $http.get('/loggedin').success(function (user) {
         $scope.user = user;
@@ -47,13 +48,36 @@ app.controller('LunchboxController', function($scope, $http, $location, $sce)
         }
     }
 
+    // Recipe serialization needs to be deferred
+    // In some cases, an API call will need to be made to get more info
+    // The defer makes the favoriting process wait for the serialization
+    // and API calls before storing the favorited recipe in the db
+    $scope.deferredSerializeRecipe = function (recipe) {
+        var defer = $.Deferred();
+        defer.resolve($scope.serializeRecipe(recipe));
+        return defer;
+    }
+
+    // When user "favorites" or likes a recipe
     $scope.favoriteRecipe = function (recipe) {
         if ($scope.user == '0') {
             $('#notLoggedInDialog').modal('show');
             return;
         }
-        recipe = $scope.serializeRecipe(recipe);
-        $http.put('/favorite', recipe)
+        // child controller may want to override deferredSerializeRecipe, i.e. search
+        var serializeRecipe = $scope.$$childHead.deferredSerializeRecipe || $scope.deferredSerializeRecipe;
+        serializeRecipe(recipe).done(function (resp) {
+            recipe = resp;
+            $http.put('/favorite', recipe)
+            .success(function (response) {
+                $scope.user = response;
+            });
+        });
+    }
+
+    // When user "unfavorites" or unlikes a recipe
+    $scope.unfavoriteRecipe = function (recipeId) {
+        $http.put('/unfavorite', recipeId)
         .success(function (response) {
             $scope.user = response;
         });
